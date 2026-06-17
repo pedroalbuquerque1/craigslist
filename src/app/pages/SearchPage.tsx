@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { mockItems } from "../data/mockData";
-import { Search, MapPin, Home as HomeIcon, Menu, Plus, MessageSquare, User } from "lucide-react";
+import { mapBackgroundImage, mockItems } from "../data/mockData";
+import { Search, MapPin, Home as HomeIcon, Plus, MessageSquare, User } from "lucide-react";
 
 export default function SearchPage() {
   const navigate = useNavigate();
@@ -17,15 +17,11 @@ export default function SearchPage() {
       {/* Header */}
       <header className="bg-[#f9f9fc] px-4 py-4 shadow-[0px_1px_1px_rgba(0,0,0,0.05)]">
         <div className="flex items-center justify-between mb-4">
-          <button className="p-1" onClick={() => navigate('/')}>
-            <Menu className="w-6 h-6 text-[#494455]" />
-          </button>
+          <div className="w-8" aria-hidden="true" />
           <h1 className="font-bold text-[32px] text-[#632ce5] leading-[40px] tracking-[-0.64px]">
             VibeClassifieds
           </h1>
-          <button className="p-1">
-            <Search className="w-6 h-6 text-[#632ce5]" />
-          </button>
+          <div className="w-8" aria-hidden="true" />
         </div>
 
         {/* View Toggle */}
@@ -74,9 +70,15 @@ export default function SearchPage() {
       {/* Main Content */}
       <main className="flex-1 overflow-hidden relative">
         {viewMode === "map" ? (
-          <div className="w-full h-full bg-gray-200 relative">
+          <div className="w-full h-full bg-gray-200 relative overflow-hidden">
+            <img
+              src={mapBackgroundImage}
+              alt="Mapa de proximidade"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-white/10" />
             {/* Map placeholder */}
-            <div className="absolute inset-0 flex items-center justify-center">
+            <div className="absolute inset-0 hidden items-center justify-center">
               <div className="text-center">
                 <MapPin className="w-16 h-16 text-gray-400 mx-auto mb-2" />
                 <p className="text-gray-500">Mapa de Proximidade</p>
@@ -107,7 +109,13 @@ export default function SearchPage() {
                 onClick={() => navigate('/item/1')}
               >
                 <div className="flex gap-3">
-                  <div className="w-16 h-16 bg-gray-200 rounded-lg flex-shrink-0" />
+                  <div className="w-16 h-16 bg-gray-200 rounded-lg flex-shrink-0 overflow-hidden">
+                    <img
+                      src={mockItems[0].images[0]}
+                      alt={mockItems[0].title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                   <div className="flex-1 min-w-0">
                     <div className="bg-[#62ff96] text-[#005226] px-2 py-1 rounded-full text-[10px] font-semibold inline-block mb-1 uppercase">
                       Imóvel
@@ -133,7 +141,13 @@ export default function SearchPage() {
                 onClick={() => navigate('/item/2')}
               >
                 <div className="flex gap-3">
-                  <div className="w-16 h-16 bg-gray-200 rounded-lg flex-shrink-0" />
+                  <div className="w-16 h-16 bg-gray-200 rounded-lg flex-shrink-0 overflow-hidden">
+                    <img
+                      src={mockItems[1].images[0]}
+                      alt={mockItems[1].title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                   <div className="flex-1 min-w-0">
                     <div className="bg-[#00affe] text-[#003f5f] px-2 py-1 rounded-full text-[10px] font-semibold inline-block mb-1 uppercase">
                       Tecnologia
@@ -172,7 +186,13 @@ export default function SearchPage() {
                   onClick={() => navigate(`/item/${item.id}`)}
                 >
                   <div className="flex gap-4 p-4">
-                    <div className="w-24 h-24 bg-gray-200 rounded-lg flex-shrink-0" />
+                    <div className="w-24 h-24 bg-gray-200 rounded-lg flex-shrink-0 overflow-hidden">
+                      <img
+                        src={item.images[0]}
+                        alt={item.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
                     <div className="flex-1 min-w-0">
                       <div
                         className="px-2 py-1 rounded-full text-[10px] font-semibold inline-block mb-2 uppercase"

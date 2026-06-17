@@ -1,28 +1,39 @@
+import { useState } from "react";
 import { useNavigate } from "react-router";
-import { mockItems, categories } from "../data/mockData";
+import { mockItems } from "../data/mockData";
 import { Home, Search as SearchIcon, Plus, MessageSquare, User } from "lucide-react";
+
+function normalizeSearchText(value: string) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
 
 export default function HomePage() {
   const navigate = useNavigate();
-  const nearbyItems = mockItems.slice(0, 2);
-  const featuredItems = mockItems.slice(2, 4);
+  const [searchTerm, setSearchTerm] = useState("");
+  const normalizedSearch = normalizeSearchText(searchTerm.trim());
+  const filteredItems = normalizedSearch
+    ? mockItems.filter((item) =>
+        normalizeSearchText(
+          [item.title, item.category, item.location, item.description].join(" ")
+        ).includes(normalizedSearch)
+      )
+    : mockItems;
+  const nearbyItems = filteredItems.slice(0, 2);
+  const featuredItems = filteredItems.slice(2, 4);
 
   return (
     <div className="flex flex-col h-screen bg-[#f9f9fc] max-w-[390px] mx-auto">
       {/* Header */}
       <header className="bg-[#f9f9fc] px-4 py-4 shadow-[0px_1px_1px_rgba(0,0,0,0.05)]">
         <div className="flex items-center justify-between mb-4">
-          <button className="p-2">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
+          <div className="w-10" aria-hidden="true" />
           <h1 className="font-bold text-[32px] text-[#632ce5] leading-[40px] tracking-[-0.64px]">
             VibeClassifieds
           </h1>
-          <button className="p-2" onClick={() => navigate('/search')}>
-            <SearchIcon className="w-6 h-6" />
-          </button>
+          <div className="w-10" aria-hidden="true" />
         </div>
 
         {/* Search Bar */}
@@ -31,9 +42,9 @@ export default function HomePage() {
           <input
             type="text"
             placeholder="O que você está procurando?"
+            value={searchTerm}
+            onChange={(event) => setSearchTerm(event.target.value)}
             className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 bg-white"
-            onClick={() => navigate('/search')}
-            readOnly
           />
           <button className="absolute right-3 top-1/2 transform -translate-y-1/2">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -96,7 +107,12 @@ export default function HomePage() {
                 className="bg-white rounded-xl overflow-hidden shadow-sm cursor-pointer"
                 onClick={() => navigate(`/item/${item.id}`)}
               >
-                <div className="h-32 bg-gray-200 relative">
+                <div className="h-32 bg-gray-200 relative overflow-hidden">
+                  <img
+                    src={item.images[0]}
+                    alt={item.title}
+                    className="w-full h-full object-cover"
+                  />
                   <div className="absolute top-2 right-2 bg-[#632ce5] text-white px-3 py-1 rounded-full text-xs font-semibold">
                     €{item.price.toLocaleString()}
                   </div>
@@ -128,7 +144,12 @@ export default function HomePage() {
                 className="bg-white rounded-xl p-4 shadow-sm flex gap-4 cursor-pointer"
                 onClick={() => navigate(`/item/${item.id}`)}
               >
-                <div className="w-20 h-20 bg-gray-200 rounded-lg flex-shrink-0 relative">
+                <div className="w-20 h-20 bg-gray-200 rounded-lg flex-shrink-0 relative overflow-hidden">
+                  <img
+                    src={item.images[0]}
+                    alt={item.title}
+                    className="w-full h-full object-cover"
+                  />
                   <span className="absolute top-1 left-1 bg-[#62ff96] text-[#005226] px-2 py-0.5 rounded text-[10px] font-semibold uppercase">
                     {item.category === "Móveis" ? "IMÓVEIS" : "SERVIÇOS"}
                   </span>

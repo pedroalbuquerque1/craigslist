@@ -89,7 +89,13 @@ export default function ProfilePage() {
                   className="bg-white rounded-xl p-3 shadow-sm flex gap-3 cursor-pointer"
                   onClick={() => navigate(`/item/${item.id}`)}
                 >
-                  <div className="w-16 h-16 bg-gray-200 rounded-lg flex-shrink-0" />
+                  <div className="w-16 h-16 bg-gray-200 rounded-lg flex-shrink-0 overflow-hidden">
+                    <img
+                      src={item.images[0]}
+                      alt={item.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                   <div className="flex-1 min-w-0">
                     <p className="font-semibold text-sm text-[#1a1c1e] truncate">{item.title}</p>
                     <p className="text-[#632ce5] font-bold text-base">

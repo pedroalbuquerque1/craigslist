@@ -1,3 +1,10 @@
+import bikeImage from "../assets/listings/bike1.png";
+import headphonesImage from "../assets/listings/headphones1.png";
+import mapBackgroundImage from "../assets/listings/map-bg.png";
+import shoesImage from "../assets/listings/shoes1.png";
+import sofaImage from "../assets/listings/sofa1.png";
+import watchImage from "../assets/listings/watch1.png";
+
 export interface ClassifiedItem {
   id: string;
   title: string;
@@ -44,7 +51,7 @@ export const mockItems: ClassifiedItem[] = [
       reviews: 124,
       verified: true,
     },
-    images: ["/bike1.jpg", "/bike2.jpg", "/bike3.jpg"],
+    images: [bikeImage],
   },
   {
     id: "2",
@@ -67,7 +74,7 @@ export const mockItems: ClassifiedItem[] = [
       reviews: 89,
       verified: true,
     },
-    images: ["/watch1.jpg"],
+    images: [watchImage],
   },
   {
     id: "3",
@@ -90,7 +97,7 @@ export const mockItems: ClassifiedItem[] = [
       reviews: 156,
       verified: true,
     },
-    images: ["/shoes1.jpg"],
+    images: [shoesImage],
   },
   {
     id: "4",
@@ -113,7 +120,7 @@ export const mockItems: ClassifiedItem[] = [
       reviews: 203,
       verified: true,
     },
-    images: ["/sofa1.jpg"],
+    images: [sofaImage],
   },
   {
     id: "5",
@@ -136,7 +143,7 @@ export const mockItems: ClassifiedItem[] = [
       reviews: 78,
       verified: true,
     },
-    images: ["/headphone1.jpg"],
+    images: [headphonesImage],
   },
 ];
 
@@ -166,3 +173,5 @@ export const categories = [
     bgColor: "#ddd6fe",
   },
 ];
+
+export { mapBackgroundImage };

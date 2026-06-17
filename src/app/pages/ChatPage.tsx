@@ -87,7 +87,13 @@ export default function ChatPage() {
         {/* Item Context Bar */}
         <div className="border-b border-[#cac3d8] px-4 py-2 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-[#e2e2e5] rounded-lg flex-shrink-0" />
+            <div className="w-12 h-12 bg-[#e2e2e5] rounded-lg flex-shrink-0 overflow-hidden">
+              <img
+                src={item.images[0]}
+                alt={item.title}
+                className="w-full h-full object-cover"
+              />
+            </div>
             <div className="max-w-[180px]">
               <h3 className="font-semibold text-sm text-[#1a1c1e] truncate">
                 {item.title}
@@ -134,7 +140,13 @@ export default function ChatPage() {
                 }`}
               >
                 {message.hasImage && (
-                  <div className="bg-gray-200 h-56 rounded-lg mb-2 overflow-hidden" />
+                  <div className="bg-gray-200 h-56 rounded-lg mb-2 overflow-hidden">
+                    <img
+                      src={item.images[0]}
+                      alt={item.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                 )}
                 
                 <p

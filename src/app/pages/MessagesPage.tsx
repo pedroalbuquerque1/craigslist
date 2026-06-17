@@ -61,9 +61,7 @@ export default function MessagesPage() {
           <h1 className="font-bold text-[32px] text-[#632ce5] leading-[40px] tracking-[-0.64px]">
             VibeClassifieds
           </h1>
-          <button className="p-2">
-            <Search className="w-6 h-6 text-[#494455]" />
-          </button>
+          <div className="w-10" aria-hidden="true" />
         </div>
         <h2 className="font-bold text-xl text-[#1a1c1e]">Mensagens</h2>
       </header>

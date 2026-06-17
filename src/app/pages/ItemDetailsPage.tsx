@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { mockItems } from "../data/mockData";
+import { mapBackgroundImage, mockItems } from "../data/mockData";
 import { ArrowLeft, Share2, Heart, MapPin, Star, Phone, MessageCircle, ChevronDown } from "lucide-react";
 
 export default function ItemDetailsPage() {
@@ -42,10 +42,17 @@ export default function ItemDetailsPage() {
       {/* Main Content */}
       <main className="flex-1 overflow-y-auto pt-16 pb-24">
         {/* Hero Image */}
-        <div className="relative w-full h-[292.5px] bg-gray-200">
+        <div className="relative w-full h-[292.5px] bg-gray-200 overflow-hidden">
+          <img
+            src={item.images[currentImageIndex]}
+            alt={item.title}
+            className="w-full h-full object-cover"
+          />
           <div className="absolute bottom-4 left-4 flex gap-1">
             <div className="backdrop-blur-md bg-white/70 rounded-lg px-2 py-1">
-              <span className="text-xs font-medium text-[#1a1c1e]">1/5</span>
+              <span className="text-xs font-medium text-[#1a1c1e]">
+                {currentImageIndex + 1}/{item.images.length}
+              </span>
             </div>
             <div className="backdrop-blur-md bg-white/70 rounded-lg px-2 py-1 flex items-center gap-1">
               <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
@@ -150,7 +157,12 @@ export default function ItemDetailsPage() {
             </div>
             
             <div className="relative h-48 bg-gray-200 rounded-xl overflow-hidden">
-              <div className="absolute inset-0 flex items-center justify-center">
+              <img
+                src={mapBackgroundImage}
+                alt={`Região de ${item.location}`}
+                className="w-full h-full object-cover opacity-40 blur-[1px] scale-105"
+              />
+              <div className="absolute inset-0 flex items-center justify-center bg-[#f9f9fc]/40">
                 <div className="bg-[#632ce5]/20 rounded-full p-3">
                   <MapPin className="w-6 h-6 text-[#632ce5]" />
                 </div>
