@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router";
+import { createHashRouter } from "react-router";
 import HomePage from "./pages/HomePage";
 import SearchPage from "./pages/SearchPage";
 import ItemDetailsPage from "./pages/ItemDetailsPage";
@@ -7,7 +7,7 @@ import MessagesPage from "./pages/MessagesPage";
 import ProfilePage from "./pages/ProfilePage";
 import PostPage from "./pages/PostPage";
 
-export const router = createBrowserRouter([
+export const router = createHashRouter([
   { path: "/", Component: HomePage },
   { path: "/search", Component: SearchPage },
   { path: "/item/:id", Component: ItemDetailsPage },
